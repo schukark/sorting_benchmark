@@ -4,7 +4,7 @@
 #include <iostream>
 
 int main() {
-    Sorter<int> *tester = new Merge_sorter<int>();
+    Sorter<int> *tester = new Quick_sorter<int>();
     Benchmark<int> bench(tester);
     
     bench.test();

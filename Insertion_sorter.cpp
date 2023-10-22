@@ -1,6 +1,6 @@
 #pragma once
 
-#ifndef BUBBLE_SORT_CPP
+#ifndef INSERTION_SORT_CPP
 
 #include "Sorter.cpp"
 #include <vector>

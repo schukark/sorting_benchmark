@@ -1,6 +1,6 @@
 #pragma once
 
-#ifndef BUBBLE_SORT_CPP
+#ifndef MERGE_SORTER_CPP
 
 #include "Sorter.cpp"
 #include <vector>
