@@ -1,4 +1,4 @@
-#include "Sorters.hpp"
+#include "Sorters/Sorters.hpp"
 #include "Benchmark.cpp"
 
 #include <iostream>

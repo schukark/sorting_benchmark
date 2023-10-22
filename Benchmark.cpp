@@ -2,7 +2,7 @@
 
 #ifndef BENCHMARK_CPP
 
-#include "Sorter.cpp"
+#include "Sorters/Sorter.cpp"
 
 #include <concepts>
 #include <random>
