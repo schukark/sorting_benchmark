@@ -27,7 +27,7 @@ private:
         //std::uniform_int_distribution<int> dis(left, right);
         //int pivot_ind = dis(gen);
         int pivot_ind = left;
-        int pivot = data[pivot_ind];
+        T pivot = data[pivot_ind];
 
         int count = 0;
         for (int i = left; i <= right; i++) {

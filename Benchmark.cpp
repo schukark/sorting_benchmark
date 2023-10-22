@@ -2,7 +2,7 @@
 
 #ifndef BENCHMARK_CPP
 
-#include "Sorters/Sorter.cpp"
+#include "src/Sorter.cpp"
 
 #include <concepts>
 #include <random>
@@ -75,6 +75,7 @@ private:
     }
 
     void generate_test(size_t test_size) {
+        static_assert(std::is_arithmetic_v<T>, "Can't generate random strings");
         T min_value = std::numeric_limits<T>::min();
         T max_value = std::numeric_limits<T>::max();
 
