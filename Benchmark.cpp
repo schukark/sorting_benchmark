@@ -23,7 +23,7 @@ public:
         }
         else if constexpr(std::is_same_v<T, std::string>) {
             test_sizes = {10, 30, 100, 300, 1000, 3000, 10000};
-            lengths = {1, 10, 100, 1000};
+            lengths = {1, 10, 100, 1000, 10000};
         }
     }
 
@@ -57,7 +57,7 @@ public:
                 std::cout << "|" << std::setw(7) << string_size << "|";
                 
                 for (auto& test_size : test_sizes) {
-                    if (sorting_engine->get_max_test_size() >= test_size * string_size) {
+                    if (sorting_engine->get_max_test_size() >= test_size) {
                         std::cout << std::setw(15) << convert_time(test_one_size(test_size, string_size)) << "|";
                     }
                     else {

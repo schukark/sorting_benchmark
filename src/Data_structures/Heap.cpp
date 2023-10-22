@@ -23,8 +23,8 @@ public:
         heapify();
     }
 
-    std::vector<int> get_sorted() {
-        std::vector<int> ans(arr.size());
+    std::vector<T> get_sorted() {
+        std::vector<T> ans(arr.size());
         int n = arr.size();
         for (int i = 0; i < n; i++) {
             ans[i] = extract_min();

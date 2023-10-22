@@ -6,11 +6,11 @@
 using custom_type = std::string;
 
 int main() {
-    Sorter<custom_type> *tester = new Insertion_sorter<custom_type>();
+    Sorter<custom_type> *tester = new Quick_sorter<custom_type>();
     Benchmark<custom_type> bench(tester);
     
-    //bench.test();
-    bench.test_correctness();
+    bench.test();
+    //bench.test_correctness();
 
     return 0;
 }
