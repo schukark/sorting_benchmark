@@ -121,6 +121,7 @@ private:
 
         for (int i = 0; i < runs; i++) {
             result += time_test(test_size, string_size);
+            
         }
 
         return result / runs;
@@ -148,7 +149,7 @@ private:
                 it = dis(gen);
             }
 
-            test_data = std::move(arr);
+            test_data = arr;
         }
         else if constexpr(std::is_same_v<T, std::string>) {
             std::vector<T> arr(test_size);
@@ -159,10 +160,10 @@ private:
                 for (auto& ch : current) {
                     ch += dis(gen);
                 }
-                it = std::move(current);
+                it = current;
             }
 
-            test_data = std::move(arr);
+            test_data = arr;
         }
     }
 

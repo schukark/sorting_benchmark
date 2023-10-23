@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-using custom_type = std::string;
+using custom_type = int;
 
 int main() {
     Sorter<custom_type> *tester = new Quick_sorter<custom_type>();
