@@ -116,7 +116,7 @@ public:
     }
 
 private:
-    auto test_one_size(size_t test_size, size_t string_size, int runs = 10) {
+    int64_t test_one_size(size_t test_size, size_t string_size = 0, int runs = 10) {
         int64_t result = 0;
 
         for (int i = 0; i < runs; i++) {
@@ -126,7 +126,7 @@ private:
         return result / runs;
     }
 
-    auto time_test(size_t test_size, size_t string_size = 0) {
+    int64_t time_test(size_t test_size, size_t string_size = 0) {
         generate_test(test_size, string_size);
 
         auto start = std::chrono::high_resolution_clock::now();
