@@ -8,7 +8,7 @@
 template<class T>
 class Merge_sorter : public Sorter<T> {
 public:
-    Merge_sorter() : Sorter<T>(3e5, "Merge sort") {}
+    Merge_sorter() : Sorter<T>(1e6, "Merge sort") {}
 
     void sort(std::vector<T>& data, int l, int r) override {
         if (l == r) return;
