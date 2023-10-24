@@ -6,7 +6,7 @@
 using custom_type = int;
 
 int main() {
-    Sorter<custom_type> *tester = new Merge_sorter<custom_type>();
+    Sorter<custom_type> *tester = new Quick_sorter<custom_type>();
     Benchmark<custom_type> bench(tester);
     
     bench.test();

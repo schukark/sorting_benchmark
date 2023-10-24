@@ -69,52 +69,6 @@ public:
         }
     }
 
-    void test_correctness () {
-        if constexpr (std::is_integral_v<T>) {
-            std::cout << std::setw(23) << sorting_engine->get_sort_name() << std::endl;
-            std::cout << "|" << std::setw(7) << "N" << "|" << std::setw(15) << "Time taken" << "|" << std::endl;
-
-            for (const auto& test_size : test_sizes) {
-                std::cout << "|" << std::setw(7) << test_size << "|";
-
-                if (sorting_engine->get_max_test_size() >= test_size) {
-                    test_one_size(test_size);
-                    bool sorted = std::is_sorted(test_data.begin(), test_data.end());
-                    std::cout << std::setw(15) << sorted << "|" << std::endl;
-                }
-                else {
-                    std::cout << std::setw(15) << ">5s" << "|" << std::endl;
-                }
-            }
-        }
-
-        else if constexpr (std::is_same_v<T, std::string>) {
-            std::cout << std::setw(23) << sorting_engine->get_sort_name() << std::endl;
-
-            std::cout << "|" << std::setw(7) << "M \\ N" << "|";
-            for (auto& test_size : test_sizes) {
-                std::cout << std::setw(15) << test_size << "|";
-            }
-            std::cout << std::endl;
-
-            for (auto& string_size : lengths) {
-                std::cout << "|" << std::setw(7) << string_size << "|";
-                
-                for (auto& test_size : test_sizes) {
-                    if (sorting_engine->get_max_test_size() >= test_size) {
-                        test_one_size(test_size, string_size);
-                        bool sorted = std::is_sorted(test_data.begin(), test_data.end());
-                        std::cout << std::setw(15) << sorted << "|";
-                    }
-                    else {
-                        std::cout << std::setw(15) << "not tested" << "|";
-                    }
-                }
-                std::cout << std::endl;
-            }
-        }
-    }
-
 private:
     int64_t test_one_size(size_t test_size, size_t string_size = 0, int runs = 10) {
         int64_t result = 0;
@@ -128,16 +82,19 @@ private:
     }
 
     int64_t time_test(size_t test_size, size_t string_size = 0) {
-        generate_test(test_size, string_size);
+        test_data = generate_test(test_size, string_size);
 
         auto start = std::chrono::high_resolution_clock::now();
         sorting_engine->sort(test_data, 0, test_size - 1);
         auto end = std::chrono::high_resolution_clock::now();
 
-        return std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+        int64_t result = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+        //std::cout << result << std::endl;
+
+        return result;
     }
 
-    void generate_test(size_t test_size, size_t string_size = 0) {
+    std::vector<T> generate_test(size_t test_size, size_t string_size = 0) {
         if constexpr(std::is_integral_v<T>) {
             T min_value = std::numeric_limits<T>::min();
             T max_value = std::numeric_limits<T>::max();
@@ -149,7 +106,7 @@ private:
                 it = dis(gen);
             }
 
-            test_data = arr;
+            return arr;
         }
         else if constexpr(std::is_same_v<T, std::string>) {
             std::vector<T> arr(test_size);
@@ -163,7 +120,7 @@ private:
                 it = current;
             }
 
-            test_data = arr;
+            return arr;
         }
     }
 
