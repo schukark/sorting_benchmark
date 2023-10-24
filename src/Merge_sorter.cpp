@@ -10,16 +10,13 @@ class Merge_sorter : public Sorter<T> {
 public:
     Merge_sorter() : Sorter<T>(1e6, "Merge sort") {}
 
-    void sort(std::vector<T>& data, int l, int r) {
+    void sort(std::vector<T>& data, int l, int r) override {
         int n = data.size();
 
         for (int curr_size = 1; curr_size < n; curr_size *= 2) {
             for (int l = 0; l < n - 1; l += 2 * curr_size) {
                 int mid = std::min(l + curr_size - 1, n - 1);
                 int r = std::min(l + 2 * curr_size - 1, n - 1);
-                
-                sort(data, l, mid);
-                sort(data, mid + 1, r);
                 merge(data, l, mid, r);
             }
         }
