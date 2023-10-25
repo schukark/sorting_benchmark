@@ -27,15 +27,15 @@ private:
         int left_size = mid - l + 1;
         int right_size = r - mid;
 
-        std::vector<T> left(left_size);
-        std::vector<T> right(right_size);
+        std::vector<T> left(data.begin() + l, data.begin() + mid + 1);
+        std::vector<T> right(data.begin() + mid + 1, data.begin() + r + 1);
 
-        for (int i = 0; i < left_size; i++) {
+        /*for (int i = 0; i < left_size; i++) {
             left[i] = data[l + i];
         }
         for (int j = 0; j < right_size; j++) {
             right[j] = data[mid + 1 + j];
-        }
+        }*/
 
         int i = 0, j = 0, k = l;
 
