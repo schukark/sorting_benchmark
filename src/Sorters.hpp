@@ -7,5 +7,6 @@
 #include "Insertion_sorter.cpp"
 #include "Quick_sorter.cpp"
 #include "Heap_sorter.cpp"
+#include "G_quick_sorter.cpp"
 
 #endif

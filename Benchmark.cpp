@@ -7,6 +7,7 @@
 #include <concepts>
 #include <random>
 #include <algorithm>
+#include <assert.h>
 
 #include <limits>
 #include <chrono>
@@ -41,6 +42,8 @@ public:
                 else {
                     std::cout << std::setw(15) << ">5s" << "|" << std::endl;
                 }
+
+                assert(std::is_sorted(test_data.begin(), test_data.end()));
             }
         }
 
