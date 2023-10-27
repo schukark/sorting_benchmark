@@ -14,6 +14,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 
 template<class T>
 class Benchmark {
@@ -26,6 +27,8 @@ public:
             test_sizes = {10, 30, 100, 300, 1000, 3000, 10000};
             lengths = {1, 10, 100, 1000, 10000};
         }
+
+        fout = std::ofstream("benchmark_results/" + sorting_engine->get_sort_name() + ".txt");
     }
 
     void test() {
@@ -37,10 +40,13 @@ public:
                 std::cout << "|" << std::setw(7) << test_size << "|";
 
                 if (sorting_engine->get_max_test_size() >= test_size) {
-                    std::cout << std::setw(15) << convert_time(test_one_size(test_size)) << "|" << std::endl;
+                    auto result = test_one_size(test_size);
+                    std::cout << std::setw(15) << convert_time(result) << "|" << std::endl;
+                    fout << "N:" << test_size << " " << result << std::endl;
                 }
                 else {
                     std::cout << std::setw(15) << ">5s" << "|" << std::endl;
+                    fout << "N:" << test_size << " " << ">5s" << std::endl;
                 }
 
                 assert(std::is_sorted(test_data.begin(), test_data.end()) && "Array was sorted incorrectly");
@@ -61,10 +67,13 @@ public:
                 
                 for (auto& test_size : test_sizes) {
                     if (sorting_engine->get_max_test_size() >= test_size) {
-                        std::cout << std::setw(15) << convert_time(test_one_size(test_size, string_size)) << "|";
+                        auto result = test_one_size(test_size, string_size);
+                        std::cout << std::setw(15) << convert_time(result) << "|";
+                        fout << "(N: " << test_size << " M: " << string_size << ") " << result << std::endl;
                     }
                     else {
                         std::cout << std::setw(15) << ">5s" << "|";
+                        fout << "(N: " << test_size << " M: " << string_size << ") " << ">5s" << std::endl;
                     }
                     assert(std::is_sorted(test_data.begin(), test_data.end()) && "Array was sorted incorrectly");
                 }
@@ -148,6 +157,7 @@ private:
     std::vector<T> test_data;
     std::vector<size_t> test_sizes;
     std::vector<size_t> lengths;
+    std::ofstream fout;
 };
 
 #endif
