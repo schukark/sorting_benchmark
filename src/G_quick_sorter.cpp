@@ -70,20 +70,20 @@ private:
     }
 
     void sort_5(std::vector<T>& data, size_t left, size_t right) const {
-        if (right - left == 4) {
+        /*if (right - left == 4) {
             for (const auto& [x, y]: changes) {
                 if (data[left + x] > data[left + y]) {
                     std::swap(data[left + x], data[left + y]);
                 }
             }
-        }
-        else {
+        }*/
+        //else {
             std::sort(data.begin() + left, data.begin() + right + 1);
-        }
+        //}
     }
 
 
-    std::vector<std::pair<size_t, size_t>> changes = {{0, 1}, {3, 4}, {1, 2}, {0, 3}, {2, 4}, {1, 3}, {1, 2}};
+    //std::vector<std::pair<size_t, size_t>> changes = {{0, 1}, {3, 4}, {1, 2}, {0, 3}, {2, 4}, {1, 3}, {1, 2}};
     std::random_device rd;
     std::mt19937 gen;
 };

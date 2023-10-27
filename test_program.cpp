@@ -6,18 +6,27 @@
 
 #include <iostream>
 
-using custom_type = int;
-
 int main() {
-    std::vector<Sorter<custom_type>*> sorters = {
-        new Insertion_sorter<custom_type>, 
-        new Merge_sorter<custom_type>,
-        new Quick_sorter<custom_type>,
-        new Heap_sorter<custom_type>,
-        new G_quick_sorter<custom_type>,
+    std::vector<Sorter<int>*> int_sorters = {
+        new Insertion_sorter<int>, 
+        new Merge_sorter<int>,
+        new Quick_sorter<int>,
+        new Heap_sorter<int>,
+        new G_quick_sorter<int>,
     };
-    for (auto& it : sorters) {;
-        Benchmark<custom_type> bench(it);
+    for (auto& it : int_sorters) {;
+        Benchmark<int> bench(it);
+    
+        bench.test();
+    }
+
+    std::vector<Sorter<std::string>*> string_sorters = {
+        new Insertion_sorter<std::string>, 
+        new Insertion_bin_sorter<std::string>
+    };
+
+    for (auto& it : string_sorters) {
+        Benchmark<std::string> bench(it);
     
         bench.test();
     }

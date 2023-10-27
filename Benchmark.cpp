@@ -20,15 +20,17 @@ template<class T>
 class Benchmark {
 public:
     Benchmark(Sorter<T>* sorting_engine): sorting_engine(sorting_engine), gen(rd()) {
+        std::string file_name = sorting_engine->get_sort_name() + ".txt";
+        
         if constexpr(std::is_integral_v<T>) {
             test_sizes = {10, 30, 100, 300, 1000, 3000, 10000, 30000, 100000, 300000, 1000000};
+            fout = std::ofstream("benchmark_results/Int_" + file_name);
         }
         else if constexpr(std::is_same_v<T, std::string>) {
             test_sizes = {10, 30, 100, 300, 1000, 3000, 10000};
             lengths = {1, 10, 100, 1000, 10000};
+            fout = std::ofstream("benchmark_results/String_" + file_name);
         }
-
-        fout = std::ofstream("benchmark_results/" + sorting_engine->get_sort_name() + ".txt");
     }
 
     void test() {
