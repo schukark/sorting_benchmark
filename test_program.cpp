@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-using custom_type = std::string;
+using custom_type = int;
 using sorter_engine = Insertion_sorter<custom_type>;
 
 int main() {
