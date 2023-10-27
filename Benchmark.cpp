@@ -43,7 +43,7 @@ public:
                     std::cout << std::setw(15) << ">5s" << "|" << std::endl;
                 }
 
-                assert(std::is_sorted(test_data.begin(), test_data.end()));
+                assert(std::is_sorted(test_data.begin(), test_data.end()) && "Array was sorted incorrectly");
             }
         }
 
@@ -66,6 +66,7 @@ public:
                     else {
                         std::cout << std::setw(15) << ">5s" << "|";
                     }
+                    assert(std::is_sorted(test_data.begin(), test_data.end()) && "Array was sorted incorrectly");
                 }
                 std::cout << std::endl;
             }
