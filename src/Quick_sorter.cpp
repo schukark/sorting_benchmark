@@ -24,34 +24,33 @@ public:
 
 private:
     int partition(std::vector<T>& data, int left, int right) {
-        //std::uniform_int_distribution<int> dis(left, right);
-        //int pivot_ind = dis(gen);
+        T pivot = 0LL + data[left] + data[right] + data[(right + left) / 2] - 
+            std::max(data[left], std::max(data[right], data[(right + left) / 2])) - std::min(data[left], std::min(data[right], data[(right + left) / 2]));
+        
         int pivot_ind = left;
-        T pivot = data[pivot_ind];
+        //T pivot = data[pivot_ind];
 
-        int count = 0;
-        for (int i = left; i <= right; i++) {
-            count += (data[i] <= pivot && i != pivot_ind);
+        if (pivot == data[right]) {
+            pivot_ind = right;
+        }
+        else if (pivot == data[(right + left) / 2]) {
+            pivot_ind = (right + left) / 2;
         }
 
-        std::swap(data[pivot_ind + count], data[pivot_ind]);
+        std::swap(data[right], data[pivot_ind]);
 
-        int i = left, j = right;
+        int i = left;
 
-        while (i < pivot_ind + count && j > pivot_ind + count) {
-            while (data[i] <= pivot) {
+        for (int j = left; j < right; j++) {
+            if (data[j] <= pivot) {
+                std::swap(data[i], data[j]);
                 i++;
             }
-            while (data[j] > pivot) {
-                j--;
-            }
-
-            if (i < pivot_ind + count && j > pivot_ind + count) {
-                std::swap(data[i++], data[j--]);
-            }
         }
 
-        return pivot_ind + count;
+        std::swap(data[i], data[right]);
+
+        return i;
     }
 
 
