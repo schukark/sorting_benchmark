@@ -70,12 +70,16 @@ private:
     }
 
     void sort_5(std::vector<T>& data, size_t left, size_t right) const {
-        /*for (const auto& [x, y]: changes) {
-            if (data[index + x] > data[index + y]) {
-                std::swap(data[index + x], data[index + y]);
+        if (right - left == 4) {
+            for (const auto& [x, y]: changes) {
+                if (data[left + x] > data[left + y]) {
+                    std::swap(data[left + x], data[left + y]);
+                }
             }
-        }*/
-        std::sort(data.begin() + left, data.begin() + right + 1);
+        }
+        else {
+            std::sort(data.begin() + left, data.begin() + right + 1);
+        }
     }
 
 
