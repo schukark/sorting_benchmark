@@ -3,13 +3,13 @@
 
 #include <iostream>
 
-using custom_type = int;
-using sorter_engine = Quick_sorter<custom_type>;
+using custom_type = std::string;
+using sorter_engine = Insertion_sorter<custom_type>;
 
 int main() {
-    Sorter<custom_type> *tester = new sorter_engine();
+    Sorter<custom_type>* tester = new sorter_engine();
     Benchmark<custom_type> bench(tester);
-    
+
     bench.test();
     return 0;
 }
