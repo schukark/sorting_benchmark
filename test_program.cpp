@@ -1,4 +1,4 @@
-//#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC optimize("O3,unroll-loops")
 #pragma GCC target("avx2")
 
 #include "src/Sorters.hpp"
@@ -15,7 +15,6 @@ int main() {
         new G_quick_sorter<int>,
     };
     for (auto& it : int_sorters) {
-        ;
         Benchmark<int> bench(it);
 
         bench.test();
@@ -31,6 +30,5 @@ int main() {
 
         bench.test();
     }
-finalle:
     return 0;
 }
