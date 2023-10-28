@@ -6,9 +6,9 @@
 #include <vector>
 
 template<class T>
-class Merge_sorter : public Sorter<T> {
+class MergeSorter : public Sorter<T> {
 public:
-    Merge_sorter() : Sorter<T>(1e6, "Merge sort") {}
+    MergeSorter() : Sorter<T>(1e6, "Merge sort") {}
 
     void sort(std::vector<T>& data, int l, int r) override {
         int n = data.size();
@@ -29,13 +29,6 @@ private:
 
         std::vector<T> left(data.begin() + l, data.begin() + mid + 1);
         std::vector<T> right(data.begin() + mid + 1, data.begin() + r + 1);
-
-        /*for (int i = 0; i < left_size; i++) {
-            left[i] = data[l + i];
-        }
-        for (int j = 0; j < right_size; j++) {
-            right[j] = data[mid + 1 + j];
-        }*/
 
         int i = 0, j = 0, k = l;
 

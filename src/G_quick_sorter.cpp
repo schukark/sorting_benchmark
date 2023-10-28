@@ -8,9 +8,9 @@
 #include <algorithm>
 
 template<class T>
-class G_quick_sorter : public Sorter<T> {
+class GQuickSorter : public Sorter<T> {
 public:
-    G_quick_sorter() : Sorter<T>(1e6, "Guaranteed quick sort"), gen(rd()) {}
+    GQuickSorter() : Sorter<T>(1e6, "Guaranteed quick sort"), gen(rd()) {}
 
     void sort(std::vector<T>& data, int l, int r) override {
         if (l >= r) {

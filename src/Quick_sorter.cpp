@@ -7,9 +7,9 @@
 #include <random>
 
 template<class T>
-class Quick_sorter : public Sorter<T> {
+class QuickSorter : public Sorter<T> {
 public:
-    Quick_sorter() : Sorter<T>(1e6, "Quick sort"), gen(rd()) {}
+    QuickSorter() : Sorter<T>(1e6, "Quick sort"), gen(rd()) {}
 
     void sort(std::vector<T>& data, int l, int r) override {
         if (l >= r) {

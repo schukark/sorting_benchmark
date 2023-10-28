@@ -1,14 +1,14 @@
 #pragma once
 
-#ifndef BUBBLE_SORT_CPP
+#ifndef BUBBLE_SORTER_CPP
 
 #include "Sorter.cpp"
 #include <vector>
 
 template<class T>
-class Bubble_sorter: public Sorter<T> {
+class BubbleSorter: public Sorter<T> {
 public:
-    Bubble_sorter(): Sorter<T>(1e4, "Bubble sort") {}
+    BubbleSorter(): Sorter<T>(1e4, "Bubble sort") {}
 
     void sort(std::vector<T>& data, int l, int r) override {
         for (int i = 0; i < data.size(); i++) {

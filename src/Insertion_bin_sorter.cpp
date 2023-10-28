@@ -6,9 +6,9 @@
 #include <vector>
 
 template<class T>
-class Insertion_bin_sorter : public Sorter<T> {
+class InsertionBinSorter : public Sorter<T> {
 public:
-    Insertion_bin_sorter() : Sorter<T>(1e5, "Binary insertion sort") {}
+    InsertionBinSorter() : Sorter<T>(1e5, "Binary insertion sort") {}
 
     void sort(std::vector<T>& data, int l, int r) override {
         for (int i = 1; i < data.size(); ++i) {
