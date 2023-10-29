@@ -13,6 +13,7 @@ int main() {
         new QuickSorter<int>,
         new HeapSorter<int>,
         new GQuickSorter<int>,
+        new SkipListSorter<int>
     };
     for (auto& it : int_sorters) {
         Benchmark<int> bench(it);
