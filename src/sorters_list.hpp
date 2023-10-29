@@ -9,5 +9,6 @@
 #include "heap_sorter.cpp"
 #include "g_quick_sorter.cpp"
 #include "insertion_bin_sorter.cpp"
+#include "skip_list_sorter.cpp"
 
 #endif

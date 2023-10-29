@@ -11,16 +11,18 @@ std::uniform_real_distribution<double> coin_flip(0.0, 1.0);
 template<class T>
 class SkipListNode {
 public:
-    SkipListNode(T&& value, int level, bool empty_node=false): value(value), empty_node(empty_node) {
-        for (int i = 0; i < level; i++) {
-            forward.emplace_back(nullptr);
+    SkipListNode(const T& value, int level, bool empty_node=false): value(value), empty_node(empty_node) {
+        if (!empty_node) {
+            for (int i = 0; i < level; i++) {
+                T def_value;
+                forward.emplace_back(new SkipListNode(def_value, 0, true));
+            }
         }
     }
-
-private:
+    
+    std::vector<SkipListNode*> forward;
     T value;
     bool empty_node;
-    std::vector<SkipListNode*> forward;
 };
 
 template<class T>
@@ -43,7 +45,7 @@ public:
 
     //! HELPERS
 
-    size_t get_random_level() {
+    int get_random_level() {
         int level = 1;
         while (coin_flip(gen) <= probablity_of_promotion && level < kMaxLevel) {
             level++;
@@ -52,26 +54,15 @@ public:
         return level;
     }
 
-    size_t count_nodes(const std::vector<SkipListNode<T>>& nodes) {
-        int cur_level = 1;
-        if (nodes[0]->empty_node) {
-            return cur_level;
-        }
-
-        for (int i = 0; i < nodes.size(); i++) {
-            if (nodes[i] != nullptr && !nodes[i]->empty_node) {
-                cur_level++;
-            }
-        }
-
-        return cur_level;
+    int count_nodes(const SkipListNode<T>* nodes) {
+        return nodes->forward.size();
     }
 
     //! Modifying functions
     
-    void insert(T&& value) {
+    void insert(const T& value) {
         std::vector<SkipListNode<T>*> needs_updates(head->forward);
-        uint8_t cur_max_level = count_nodes(head->forward);
+        int cur_max_level = count_nodes(head);
         SkipListNode<T>* current = head;
 
         for (int i = cur_max_level - 1; i >= 0; i--) {
@@ -82,23 +73,17 @@ public:
             needs_updates[i] = current;
         }
 
-        current = current->forward[0];
-
         int new_node_level = get_random_level();
-        int cur_node_level = count_nodes(needs_updates);
-
-        if (new_node_level > cur_node_level) {
-            for (int i = cur_node_level + 1; i < new_node_level; ++i) {
-                needs_updates[i] = head;
-            }   
-        }
-
         current = new SkipListNode<T>(value, new_node_level);
 
         for (int i = 0; i < new_node_level; ++i) {
             current->forward[i] = needs_updates[i]->forward[i];
             needs_updates[i]->forward[i] = current;
         }
+    }
+
+    SkipListNode<T>* get_head() {
+        return head;
     }
 
 private:
@@ -119,6 +104,19 @@ SkipList<T> list_from_vector(std::vector<T>& data) {
     }
 
     return result;
+}
+
+template<class T>
+std::vector<T> vector_from_skip_list(SkipList<T>& list) {
+    std::vector<T> answer;
+    SkipListNode<T>* current = list.get_head()->forward[0];
+
+    while (!current->empty_node) {
+        answer.push_back(current->value);
+        current = current->forward[0];
+    }
+
+    return answer;
 }
 
 #endif

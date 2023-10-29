@@ -3,7 +3,7 @@
 #ifndef HEAP_SORTER_CPP
 
 #include "Sorter.cpp"
-#include "Data_structures/Heap.cpp"
+#include "Data_structures/heap.cpp"
 #include <vector>
 
 template<class T>
