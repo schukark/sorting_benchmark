@@ -9,7 +9,7 @@
 template<class T>
 class SkipListSorter : public Sorter<T> {
 public:
-    SkipListSorter() : Sorter<T>(1e5, "Skip list sort") {}
+    SkipListSorter() : Sorter<T>(3e5, "Skip list sort") {}
 
     void sort(std::vector<T>& data, int l, int r) override {
         SkipList<T> list = list_from_vector<T>(data);
