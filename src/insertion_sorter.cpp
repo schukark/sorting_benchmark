@@ -1,6 +1,6 @@
 #pragma once
 
-#ifndef INSERTION_SORT_CPP
+#ifndef INSERTION_SORTER_CPP
 
 #include "Sorter.cpp"
 #include <vector>

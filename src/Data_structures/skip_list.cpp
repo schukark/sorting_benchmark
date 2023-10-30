@@ -1,6 +1,6 @@
 #pragma once
 
-#ifndef SKIP_LIST_NODE_CPP
+#ifndef SKIP_LIST_CPP
 #include <vector>
 #include <random>
 

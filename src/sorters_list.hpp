@@ -1,6 +1,6 @@
 #pragma once
 
-#ifndef SORTERS_HPP
+#ifndef SORTERS_LIST_HPP
 
 #include "bubble_sorter.cpp"
 #include "merge_sorter.cpp"
