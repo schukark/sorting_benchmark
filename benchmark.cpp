@@ -33,6 +33,7 @@ public:
         }
     }
 
+    /// @brief Tests the time of sorting on different times. Prints a nice table to stdin and file as well.
     void test() {
         if constexpr (std::is_integral_v<T>) {
             std::cout << std::setw(23) << sorting_engine->get_sort_name() << std::endl;
@@ -85,6 +86,11 @@ public:
     }
 
 private:
+    /// @brief Tests the performance of the used sorting engine on a chosen test size
+    /// @param test_size Testing array size
+    /// @param string_size In case of elements being strings, the length of strings
+    /// @param runs Number of runs to average out performance
+    /// @return Average time of execution
     int64_t test_one_size(size_t test_size, size_t string_size = 0, int runs = 10) {
         int64_t result = 0;
 
@@ -96,6 +102,10 @@ private:
         return result / runs;
     }
 
+    /// @brief Measures the execution time of one run
+    /// @param test_size Array size
+    /// @param string_size If elements are strings, the string length
+    /// @return The time taken by the sorting engine
     int64_t time_test(size_t test_size, size_t string_size = 0) {
         test_data = generate_test(test_size, string_size);
 
@@ -109,6 +119,10 @@ private:
         return result;
     }
 
+    /// @brief Generates a random array of elements
+    /// @param test_size Array size
+    /// @param string_size If the elements are strings, generates strings this size
+    /// @return Generated test array
     std::vector<T> generate_test(size_t test_size, size_t string_size = 0) {
         if constexpr(std::is_integral_v<T>) {
             T min_value = std::numeric_limits<T>::min();
@@ -139,6 +153,9 @@ private:
         }
     }
 
+    /// @brief Function to convert time to mcs/ms/s depending on the value of time
+    /// @param time Time in nanoseconds
+    /// @return String representation of time value
     std::string convert_time(int64_t time) const {
         if (time < 1000) {
             return std::to_string(time) + " ns";

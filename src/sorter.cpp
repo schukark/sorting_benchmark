@@ -9,6 +9,8 @@
 #include <string>
 #include <limits>
 
+/// @brief An interface class of sorting engines, which specifies attributes neccessary for its work
+/// @tparam T data type of "to be sorted" elements
 template<class T>
 class Sorter {
 public:

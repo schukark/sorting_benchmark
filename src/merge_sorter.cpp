@@ -23,6 +23,11 @@ public:
     }
 
 private:
+    /// @brief merges two subarrays in ascending order
+    /// @param data vector of elements
+    /// @param l left boundary of first subarray
+    /// @param mid right boundary of first subarray, left boundary of second subarray
+    /// @param r right boundary of second subarray
     void merge(std::vector<T>& data, int l, int mid, int r) {
         int left_size = mid - l + 1;
         int right_size = r - mid;

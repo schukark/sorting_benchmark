@@ -25,6 +25,11 @@ public:
     }
 
 private:
+    /// @brief Function needed by quick sort to partition an array based on the pivoting element
+    /// @param data full vector to be sorted
+    /// @param left left boundary of the "to be sorted" subarray
+    /// @param right right boundary
+    /// @return the index of the pivoting element after partitioning
     int partition(std::vector<T>& data, int left, int right) {
         T pivot = choose_index(data, left, right);
         size_t pivot_ind = std::find(data.begin() + left, data.begin() + right + 1, pivot) - data.begin();
@@ -45,6 +50,11 @@ private:
         return i;
     }
 
+    /// @brief Chooses a pivoting element based on the median of medians algorithm
+    /// @param data vector of elements
+    /// @param left left boundary of subarray
+    /// @param right right boundary
+    /// @return pivoting element
     T choose_index(std::vector<T>& data, size_t left, size_t right) const {
         if (right - left + 1 <= 5) {
             return data[left + (right - left) / 2];
@@ -60,6 +70,10 @@ private:
         return choose_index(medians, 0, medians.size() - 1);
     }
 
+    /// @brief A sorting network algorithm that sorts a 5 element array in 7 comparisons
+    /// @param data full vector to be sorted
+    /// @param left left boundary of the group of 5 elements
+    /// @param right right boundary
     void sort_5(std::vector<T>& data, size_t left, size_t right) const {
         assert(right - left == 4);
         std::vector<T> result(data.begin() + left, data.begin() + right + 1);

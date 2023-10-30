@@ -23,6 +23,11 @@ public:
     }
 
 private:
+    /// @brief Function needed by quick sort to partition an array based on the pivoting element
+    /// @param data full vector to be sorted
+    /// @param left left boundary of the "to be sorted" subarray
+    /// @param right right boundary
+    /// @return the index of the pivoting element after partitioning
     int partition(std::vector<T>& data, int left, int right) {
         T pivot = 0LL + data[left] + data[right] + data[(right + left) / 2] - 
             std::max(data[left], std::max(data[right], data[(right + left) / 2])) - std::min(data[left], std::min(data[right], data[(right + left) / 2]));
