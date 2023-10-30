@@ -23,6 +23,8 @@ public:
         heapify();
     }
 
+    /// @brief Sorts the vector from heap, destroying the heap in the process
+    /// @return sorted vector
     std::vector<T> get_sorted() {
         std::vector<T> ans(arr.size());
         int n = arr.size();
@@ -34,6 +36,8 @@ public:
     }
 
 private:
+    /// @brief Sift the element down in the heap
+    /// @param index element to be sifted
     void sift_down(size_t index) {
         while (index < arr.size()) {
             size_t left = left_child(index);
@@ -57,12 +61,15 @@ private:
         }
     }
 
+    /// @brief Makes heap from vector
     void heapify() {
         for (int i = arr.size() / 2 - 1; i >= 0; i--) {
             sift_down(i);
         }
     }
 
+    /// @brief Find minimum and delete it from heap
+    /// @return the minimum
     T extract_min () {
         T min_value = arr.front();
         std::swap(arr.front(), arr.back());

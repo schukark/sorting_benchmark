@@ -45,6 +45,8 @@ public:
 
     //! HELPERS
 
+    /// @brief Get random level according to skip list rule
+    /// @return random level
     int get_random_level() {
         int level = 1;
         while (coin_flip(gen) <= probablity_of_promotion && level < kMaxLevel) {
@@ -54,12 +56,17 @@ public:
         return level;
     }
 
-    int count_nodes(const SkipListNode<T>* nodes) {
-        return nodes->forward.size();
+    /// @brief Counts number of nodes connected to this node
+    /// @param node
+    /// @return Number of nodes
+    int count_nodes(const SkipListNode<T>* node) {
+        return node->forward.size();
     }
 
     //! Modifying functions
     
+    /// @brief Inserts a given value in the skip-list
+    /// @param value 
     void insert(const T& value) {
         std::vector<SkipListNode<T>*> needs_updates(head->forward);
         int cur_max_level = count_nodes(head);
@@ -82,6 +89,8 @@ public:
         }
     }
 
+    /// @brief returns the head of the skip_list
+    /// @return 
     SkipListNode<T>* get_head() {
         return head;
     }
@@ -95,6 +104,10 @@ private:
 };
 
 
+/// @brief Generate a skip-list from a vector
+/// @tparam T vector elements' data type
+/// @param data vector of elements
+/// @return constructed skip list
 template<class T>
 SkipList<T> list_from_vector(std::vector<T>& data) {
     SkipList<T> result;
@@ -106,6 +119,10 @@ SkipList<T> list_from_vector(std::vector<T>& data) {
     return result;
 }
 
+/// @brief Makes a sorted vector from stored skip-list
+/// @tparam T vector elemtns' data type
+/// @param list skip-list to convert to vector
+/// @return sorted vector
 template<class T>
 std::vector<T> vector_from_skip_list(SkipList<T>& list) {
     std::vector<T> answer;
