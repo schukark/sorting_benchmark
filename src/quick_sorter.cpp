@@ -9,7 +9,7 @@
 template<class T>
 class QuickSorter : public Sorter<T> {
 public:
-    QuickSorter() : Sorter<T>(1e6, "Quick sort"), gen(rd()) {}
+    QuickSorter() : Sorter<T>(1e6, "Quick sort") {}
 
     void sort(std::vector<T>& data, int l, int r) override {
         if (l >= r) {
@@ -57,10 +57,6 @@ private:
 
         return i;
     }
-
-
-    std::random_device rd;
-    std::mt19937 gen;
 };
 
 #endif

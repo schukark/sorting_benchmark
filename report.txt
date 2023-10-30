@@ -63,6 +63,8 @@ public:
         heapify();
     }
 
+    /// @brief Sorts the vector from heap, destroying the heap in the process
+    /// @return sorted vector
     std::vector<T> get_sorted() {
         std::vector<T> ans(arr.size());
         int n = arr.size();
@@ -74,6 +76,8 @@ public:
     }
 
 private:
+    /// @brief Sift the element down in the heap
+    /// @param index element to be sifted
     void sift_down(size_t index) {
         while (index < arr.size()) {
             size_t left = left_child(index);
@@ -97,12 +101,15 @@ private:
         }
     }
 
+    /// @brief Makes heap from vector
     void heapify() {
         for (int i = arr.size() / 2 - 1; i >= 0; i--) {
             sift_down(i);
         }
     }
 
+    /// @brief Find minimum and delete it from heap
+    /// @return the minimum
     T extract_min () {
         T min_value = arr.front();
         std::swap(arr.front(), arr.back());
@@ -165,6 +172,8 @@ public:
 
     //! HELPERS
 
+    /// @brief Get random level according to skip list rule
+    /// @return random level
     int get_random_level() {
         int level = 1;
         while (coin_flip(gen) <= probablity_of_promotion && level < kMaxLevel) {
@@ -174,12 +183,17 @@ public:
         return level;
     }
 
-    int count_nodes(const SkipListNode<T>* nodes) {
-        return nodes->forward.size();
+    /// @brief Counts number of nodes connected to this node
+    /// @param node
+    /// @return Number of nodes
+    int count_nodes(const SkipListNode<T>* node) {
+        return node->forward.size();
     }
 
     //! Modifying functions
     
+    /// @brief Inserts a given value in the skip-list
+    /// @param value 
     void insert(const T& value) {
         std::vector<SkipListNode<T>*> needs_updates(head->forward);
         int cur_max_level = count_nodes(head);
@@ -202,6 +216,8 @@ public:
         }
     }
 
+    /// @brief returns the head of the skip_list
+    /// @return 
     SkipListNode<T>* get_head() {
         return head;
     }
@@ -215,6 +231,10 @@ private:
 };
 
 
+/// @brief Generate a skip-list from a vector
+/// @tparam T vector elements' data type
+/// @param data vector of elements
+/// @return constructed skip list
 template<class T>
 SkipList<T> list_from_vector(std::vector<T>& data) {
     SkipList<T> result;
@@ -226,6 +246,10 @@ SkipList<T> list_from_vector(std::vector<T>& data) {
     return result;
 }
 
+/// @brief Makes a sorted vector from stored skip-list
+/// @tparam T vector elemtns' data type
+/// @param list skip-list to convert to vector
+/// @return sorted vector
 template<class T>
 std::vector<T> vector_from_skip_list(SkipList<T>& list) {
     std::vector<T> answer;
@@ -298,6 +322,11 @@ public:
     }
 
 private:
+    /// @brief Function needed by quick sort to partition an array based on the pivoting element
+    /// @param data full vector to be sorted
+    /// @param left left boundary of the "to be sorted" subarray
+    /// @param right right boundary
+    /// @return the index of the pivoting element after partitioning
     int partition(std::vector<T>& data, int left, int right) {
         T pivot = choose_index(data, left, right);
         size_t pivot_ind = std::find(data.begin() + left, data.begin() + right + 1, pivot) - data.begin();
@@ -318,6 +347,11 @@ private:
         return i;
     }
 
+    /// @brief Chooses a pivoting element based on the median of medians algorithm
+    /// @param data vector of elements
+    /// @param left left boundary of subarray
+    /// @param right right boundary
+    /// @return pivoting element
     T choose_index(std::vector<T>& data, size_t left, size_t right) const {
         if (right - left + 1 <= 5) {
             return data[left + (right - left) / 2];
@@ -333,6 +367,10 @@ private:
         return choose_index(medians, 0, medians.size() - 1);
     }
 
+    /// @brief A sorting network algorithm that sorts a 5 element array in 7 comparisons
+    /// @param data full vector to be sorted
+    /// @param left left boundary of the group of 5 elements
+    /// @param right right boundary
     void sort_5(std::vector<T>& data, size_t left, size_t right) const {
         assert(right - left == 4);
         std::vector<T> result(data.begin() + left, data.begin() + right + 1);
@@ -536,6 +574,11 @@ public:
     }
 
 private:
+    /// @brief merges two subarrays in ascending order
+    /// @param data vector of elements
+    /// @param l left boundary of first subarray
+    /// @param mid right boundary of first subarray, left boundary of second subarray
+    /// @param r right boundary of second subarray
     void merge(std::vector<T>& data, int l, int mid, int r) {
         int left_size = mid - l + 1;
         int right_size = r - mid;
@@ -577,7 +620,7 @@ private:
 template<class T>
 class QuickSorter : public Sorter<T> {
 public:
-    QuickSorter() : Sorter<T>(1e6, "Quick sort"), gen(rd()) {}
+    QuickSorter() : Sorter<T>(1e6, "Quick sort") {}
 
     void sort(std::vector<T>& data, int l, int r) override {
         if (l >= r) {
@@ -591,6 +634,11 @@ public:
     }
 
 private:
+    /// @brief Function needed by quick sort to partition an array based on the pivoting element
+    /// @param data full vector to be sorted
+    /// @param left left boundary of the "to be sorted" subarray
+    /// @param right right boundary
+    /// @return the index of the pivoting element after partitioning
     int partition(std::vector<T>& data, int left, int right) {
         T pivot = 0LL + data[left] + data[right] + data[(right + left) / 2] - 
             std::max(data[left], std::max(data[right], data[(right + left) / 2])) - std::min(data[left], std::min(data[right], data[(right + left) / 2]));
@@ -620,10 +668,6 @@ private:
 
         return i;
     }
-
-
-    std::random_device rd;
-    std::mt19937 gen;
 };
 
 #endif
@@ -653,6 +697,41 @@ private:
 
 #endif
 ---------------------------------------------------------------------------------
+---------------------------------sorter.cpp--------------------------------------
+#pragma once
+//#pragma GCC optimize("O3")
+//#pragma GCC target("avx2")
+
+#ifndef SORTER_CPP
+
+#include <vector>
+#include <cstddef>
+#include <string>
+#include <limits>
+
+/// @brief An interface class of sorting engines, which specifies attributes neccessary for its work
+/// @tparam T data type of "to be sorted" elements
+template<class T>
+class Sorter {
+public:
+    Sorter<T>(size_t value, std::string name): max_test_size(value), sort_name(name) {}
+    virtual void sort(std::vector<T>& data, int l, int r) = 0;
+
+    size_t get_max_test_size() const {
+        return max_test_size;
+    }
+
+    std::string get_sort_name() const {
+        return sort_name;
+    }
+
+private:
+    size_t max_test_size;
+    std::string sort_name;
+};
+
+#endif
+---------------------------------------------------------------------------------
 ---------------------------------sorters_list.hpp--------------------------------
 #pragma once
 
@@ -669,7 +748,7 @@ private:
 
 #endif
 ---------------------------------------------------------------------------------
----------------------------------benchmark_sorter.cpp----------------------------
+---------------------------------benchmark.cpp-----------------------------------
 #pragma once
 
 #ifndef BENCHMARK_CPP
@@ -705,6 +784,7 @@ public:
         }
     }
 
+    /// @brief Tests the time of sorting on different times. Prints a nice table to stdin and file as well.
     void test() {
         if constexpr (std::is_integral_v<T>) {
             std::cout << std::setw(23) << sorting_engine->get_sort_name() << std::endl;
@@ -757,6 +837,11 @@ public:
     }
 
 private:
+    /// @brief Tests the performance of the used sorting engine on a chosen test size
+    /// @param test_size Testing array size
+    /// @param string_size In case of elements being strings, the length of strings
+    /// @param runs Number of runs to average out performance
+    /// @return Average time of execution
     int64_t test_one_size(size_t test_size, size_t string_size = 0, int runs = 10) {
         int64_t result = 0;
 
@@ -768,6 +853,10 @@ private:
         return result / runs;
     }
 
+    /// @brief Measures the execution time of one run
+    /// @param test_size Array size
+    /// @param string_size If elements are strings, the string length
+    /// @return The time taken by the sorting engine
     int64_t time_test(size_t test_size, size_t string_size = 0) {
         test_data = generate_test(test_size, string_size);
 
@@ -781,6 +870,10 @@ private:
         return result;
     }
 
+    /// @brief Generates a random array of elements
+    /// @param test_size Array size
+    /// @param string_size If the elements are strings, generates strings this size
+    /// @return Generated test array
     std::vector<T> generate_test(size_t test_size, size_t string_size = 0) {
         if constexpr(std::is_integral_v<T>) {
             T min_value = std::numeric_limits<T>::min();
@@ -811,6 +904,9 @@ private:
         }
     }
 
+    /// @brief Function to convert time to mcs/ms/s depending on the value of time
+    /// @param time Time in nanoseconds
+    /// @return String representation of time value
     std::string convert_time(int64_t time) const {
         if (time < 1000) {
             return std::to_string(time) + " ns";
