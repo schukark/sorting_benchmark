@@ -1,5 +1,6 @@
----------------------------------Repository link---------------------------------
-https://github.com/schukark/sorting_benchmark
+---------------------------------Links-------------------------------------------
+Repo link: https://github.com/schukark/sorting_benchmark
+Google colab python file link: https://colab.research.google.com/drive/1ZMJVu-Ldgs7eZPA6302UqqY6u30HZd1p?usp=sharing
 ---------------------------------------------------------------------------------
 ---------------------------------File structure----------------------------------
 sorting_benchmark/
@@ -23,6 +24,7 @@ sorting_benchmark/
 ├─ collect_data.cpp
 ├─ README.md
 ├─ report.txt
+├─ sorting_benchmark.ipynb
 ---------------------------------------------------------------------------------
 ---------------------------------Description-------------------------------------
 Каждый файл .cpp в папке Data_structures представляет реализацию вспомогательной 
